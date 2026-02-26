@@ -16,7 +16,7 @@ import { LiaUserSolid } from "react-icons/lia";
 
 
 const Row = styled.section`
-  margin: 0 0 10px;
+  margin: 0 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
@@ -487,7 +487,6 @@ export function FileSharingActiveUsersPanel() {
         </FileSharingBody>
       </Card>
 
-      {/* Active Users card */}
       <Card>
         <CardHeader>
 

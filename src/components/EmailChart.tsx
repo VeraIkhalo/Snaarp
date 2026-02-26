@@ -16,7 +16,6 @@ const Card = styled.div`
   background: white;
   border-radius: 10px;
   padding: 20px 10px;
-  
 `;
 
 const LeftCard = styled(Card)`
@@ -233,7 +232,6 @@ const TooltipTotal = styled(TooltipRow)`
   }
 `;
 
-
 import {
     XAxis,
     YAxis,
@@ -344,8 +342,6 @@ const EmailDashboard: React.FC = () => {
                             <Cell fill="#E5E7EB" />
                         </Pie>
                     </PieChart>
-
-                    {/* dotted inner ring */}
                     <InnerRing />
 
                     <CenterLabel>

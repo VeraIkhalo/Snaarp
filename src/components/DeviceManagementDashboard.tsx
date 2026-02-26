@@ -74,7 +74,6 @@ const Grid = styled.div`
   @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
@@ -100,7 +99,6 @@ const StackedCol = styled.div`
   flex-direction: column;
   gap: 10px;
   min-height: 0;
-
   & > div {
     flex: 1;
     min-height: 0;
@@ -117,14 +115,12 @@ const GroupReader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 `;
 
 const ChartSvg = styled.svg`
   width: 150px;
   height: 100px;
 `
-
 
 const EmailStatusRow = styled.div`
   display: flex;
@@ -480,75 +476,75 @@ type StatProps = {
 };
 
 const chartPaths = {
-  areaPositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6 L100,50 L0,50 Z`,
-  areaNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45 L100,50 L0,50 Z`,
-  linePositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6`,
-  lineNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45`,
+    areaPositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6 L100,50 L0,50 Z`,
+    areaNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45 L100,50 L0,50 Z`,
+    linePositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6`,
+    lineNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45`,
 };
 
 function StatBlock({ title, value, change, positive, icon }: Omit<StatProps, "showBottomStats">) {
-  const isPositive = !!positive;
-  const slug = title.replace(/\s/g, "");
-  const gradientId = (isPositive ? "statPos" : "statNeg") + slug;
-  const color = isPositive ? "#22c55e" : "#ef4444";
-  const areaPath = isPositive ? chartPaths.areaPositive : chartPaths.areaNegative;
-  const linePath = isPositive ? chartPaths.linePositive : chartPaths.lineNegative;
+    const isPositive = !!positive;
+    const slug = title.replace(/\s/g, "");
+    const gradientId = (isPositive ? "statPos" : "statNeg") + slug;
+    const color = isPositive ? "#22c55e" : "#ef4444";
+    const areaPath = isPositive ? chartPaths.areaPositive : chartPaths.areaNegative;
+    const linePath = isPositive ? chartPaths.linePositive : chartPaths.lineNegative;
 
-  return (
-    <Group>
-      <GroupReader>
-        <CardHeader>
-          <IconBox>{icon}</IconBox>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-        <ValueRow>
-          <Value>{value}</Value>
-          <Change positive={positive}>
-            <span>{positive ? "↑" : "↓"}</span>
-            <span>{change}</span>
-          </Change>
-        </ValueRow>
-        <SubText>Compared to last week</SubText>
-      </GroupReader>
-      <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity="0.35" />
-            <stop offset="100%" stopColor={color} stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
-        <path d={areaPath} fill={`url(#${gradientId})`} />
-        <path d={linePath} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
-      </ChartSvg>
-    </Group>
-  );
+    return (
+        <Group>
+            <GroupReader>
+                <CardHeader>
+                    <IconBox>{icon}</IconBox>
+                    <CardTitle>{title}</CardTitle>
+                </CardHeader>
+                <ValueRow>
+                    <Value>{value}</Value>
+                    <Change positive={positive}>
+                        <span>{positive ? "↑" : "↓"}</span>
+                        <span>{change}</span>
+                    </Change>
+                </ValueRow>
+                <SubText>Compared to last week</SubText>
+            </GroupReader>
+            <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={color} stopOpacity="0.35" />
+                        <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+                    </linearGradient>
+                </defs>
+                <path d={areaPath} fill={`url(#${gradientId})`} />
+                <path d={linePath} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+            </ChartSvg>
+        </Group>
+    );
 }
 
 function StatCard({ title, value, change, positive, icon, showBottomStats = true }: StatProps) {
-  return (
-    <Card>
-      <StatBlock title={title} value={value} change={change} positive={positive} icon={icon} />
-      {showBottomStats && (
-        <>
-          <Divider />
-          <BottomStats>
-            <MiniStat>
-              <MiniLabel>
-                <IconButton><GiUnplugged size={16} /></IconButton>
-                Plugged
-              </MiniLabel>
-              <MiniValue>1,923</MiniValue>
-            </MiniStat>
-            <MiniStat>
-              <MiniLabel>
-                <IconButton><GiUnplugged size={16} /></IconButton>
-                Unplugged
-              </MiniLabel>
-              <MiniValue>1,913</MiniValue>
-            </MiniStat>
-          </BottomStats>
-        </>
-      )}
-    </Card>
-  );
+    return (
+        <Card>
+            <StatBlock title={title} value={value} change={change} positive={positive} icon={icon} />
+            {showBottomStats && (
+                <>
+                    <Divider />
+                    <BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Plugged
+                            </MiniLabel>
+                            <MiniValue>1,923</MiniValue>
+                        </MiniStat>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Unplugged
+                            </MiniLabel>
+                            <MiniValue>1,913</MiniValue>
+                        </MiniStat>
+                    </BottomStats>
+                </>
+            )}
+        </Card>
+    );
 }

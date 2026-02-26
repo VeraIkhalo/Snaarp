@@ -166,7 +166,6 @@ const VerticalWidgetList = styled(WidgetList)`
   min-height: 200px;
 `
 
-// Initial board roughly matching the provided design blocks
 const initialState: BoardState = {
   widgets: {
     users: { id: 'users', title: 'Users', subtitle: 'Total users widget' },
@@ -217,7 +216,6 @@ const initialState: BoardState = {
   columnOrder: ['topRow', 'middleRow', 'rightColumn']
 }
 
-// Sortable Widget Component
 function SortableWidget({
   widget,
   columnId
@@ -262,7 +260,6 @@ function SortableWidget({
   )
 }
 
-// Sortable Column Component
 function SortableColumn({
   column,
   widgets,
@@ -373,7 +370,6 @@ export function DragDropBoard() {
     const activeId = active.id as WidgetId
     const overId = over.id as WidgetId
 
-    // Find which columns contain these widgets
     let sourceColumnId: ColumnId | null = null
     let destinationColumnId: ColumnId | null = null
     let sourceIndex = -1
@@ -395,7 +391,6 @@ export function DragDropBoard() {
 
     if (!sourceColumnId || !destinationColumnId) return
 
-    // Same column reordering
     if (sourceColumnId === destinationColumnId) {
       const column = board.columns[sourceColumnId]
       const newWidgetIds = arrayMove(
@@ -417,7 +412,6 @@ export function DragDropBoard() {
       return
     }
 
-    // Moving between columns
     const sourceColumn = board.columns[sourceColumnId]
     const destColumn = board.columns[destinationColumnId]
 
@@ -476,7 +470,6 @@ export function DragDropBoard() {
             })}
           </ColumnStack>
 
-          {/* Right column for storage-style widgets */}
           {(() => {
             const column = board.columns.rightColumn
             const widgets = column.widgetIds.map(

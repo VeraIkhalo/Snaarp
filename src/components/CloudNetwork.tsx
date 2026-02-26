@@ -32,7 +32,6 @@ const IconButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
-
 `
 
 const CloudNetworkTitle = styled.h2`
@@ -54,20 +53,20 @@ const CloudNetworkHeaderRight = styled.button`
 `
 
 export function CloudNetwork() {
-    return (
-        <CloudNetworkRoot>
-            <CloudNetworkHeader>
-                <CloudNetworkHeaderLeft>
-                    <IconButton aria-label="Notifications">
-                        <SiFurrynetwork size={20} />
-                    </IconButton>
-                    <CloudNetworkTitle>Cloud Network</CloudNetworkTitle>
-                </CloudNetworkHeaderLeft>
-                <CloudNetworkHeaderRight type="button">
-                    <MdOutlineKeyboardArrowDown />
-                </CloudNetworkHeaderRight>
-            </CloudNetworkHeader>
-        </CloudNetworkRoot>
-    )
+  return (
+    <CloudNetworkRoot>
+      <CloudNetworkHeader>
+        <CloudNetworkHeaderLeft>
+          <IconButton aria-label="Notifications">
+            <SiFurrynetwork size={20} />
+          </IconButton>
+          <CloudNetworkTitle>Cloud Network</CloudNetworkTitle>
+        </CloudNetworkHeaderLeft>
+        <CloudNetworkHeaderRight type="button">
+          <MdOutlineKeyboardArrowDown />
+        </CloudNetworkHeaderRight>
+      </CloudNetworkHeader>
+    </CloudNetworkRoot>
+  )
 }
 

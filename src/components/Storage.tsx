@@ -198,16 +198,15 @@ const LightningIcon = styled.div`
 `
 
 export function Storage() {
-  // Storage data - percentages add up to 100%
-  // 80% used total, 20% available
+
   const storageData = [
-    { label: 'Files', color: '#9333ea', percentage: 15 }, // Purple
-    { label: 'Folders', color: '#f97316', percentage: 12 }, // Orange
-    { label: 'Videos', color: '#10b981', percentage: 18 }, // Green
-    { label: 'Apps', color: '#3b82f6', percentage: 10 }, // Light Blue
-    { label: 'Audios', color: '#ef4444', percentage: 12 }, // Red
-    { label: 'Miscellaneous', color: '#1e40af', percentage: 13 }, // Dark Blue
-    { label: 'Available Space', color: '#e5e7eb', percentage: 20 } // Light Gray
+    { label: 'Files', color: '#9333ea', percentage: 15 },
+    { label: 'Folders', color: '#f97316', percentage: 12 },
+    { label: 'Videos', color: '#10b981', percentage: 18 },
+    { label: 'Apps', color: '#3b82f6', percentage: 10 },
+    { label: 'Audios', color: '#ef4444', percentage: 12 },
+    { label: 'Miscellaneous', color: '#1e40af', percentage: 13 },
+    { label: 'Available Space', color: '#e5e7eb', percentage: 20 }
   ]
 
   const radius = 80

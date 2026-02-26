@@ -118,7 +118,6 @@ const CopyButton = styled.button`
 export function Header() {
   const handleCopyAgentCode = () => {
     navigator.clipboard.writeText('0365o2j37742y3b38')
-    // You could add a toast notification here if needed
   }
 
   return (
@@ -172,35 +171,35 @@ export function Header() {
         </IconButton>
 
         <AgentGroup>
-        <AgentCode>
-          <AgentLabel>Agent Code:</AgentLabel>
-          <AgentValue>0365o2j37742y3b38</AgentValue>
-        </AgentCode>
+          <AgentCode>
+            <AgentLabel>Agent Code:</AgentLabel>
+            <AgentValue>0365o2j37742y3b38</AgentValue>
+          </AgentCode>
 
-        <CopyButton onClick={handleCopyAgentCode} aria-label="Copy agent code">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.333 2.667h8a1.333 1.333 0 0 1 1.334 1.333v8a1.333 1.333 0 0 1-1.334 1.333h-8a1.333 1.333 0 0 1-1.333-1.333V4a1.333 1.333 0 0 1 1.333-1.333Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2.667 5.333h8a1.333 1.333 0 0 1 1.333 1.334v8a1.333 1.333 0 0 1-1.333 1.333h-8a1.333 1.333 0 0 1-1.334-1.333v-8a1.333 1.333 0 0 1 1.334-1.334Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </CopyButton>
+          <CopyButton onClick={handleCopyAgentCode} aria-label="Copy agent code">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.333 2.667h8a1.333 1.333 0 0 1 1.334 1.333v8a1.333 1.333 0 0 1-1.334 1.333h-8a1.333 1.333 0 0 1-1.333-1.333V4a1.333 1.333 0 0 1 1.333-1.333Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M2.667 5.333h8a1.333 1.333 0 0 1 1.333 1.334v8a1.333 1.333 0 0 1-1.333 1.333h-8a1.333 1.333 0 0 1-1.334-1.333v-8a1.333 1.333 0 0 1 1.334-1.334Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </CopyButton>
         </AgentGroup>
       </HeaderRight>
     </HeaderRoot>

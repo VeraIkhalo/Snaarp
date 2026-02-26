@@ -44,6 +44,7 @@ const SidebarHeader = styled.div`
 const LogoText = styled.span`
   font-weight: 600;
   letter-spacing: 0.03em;
+  margin-bottom:20px;
   font-size: 28px;
 `
 
@@ -81,7 +82,7 @@ const Item = styled.li<{ active?: boolean }>`
 
   &:hover {
     background-color: ${({ active }) =>
-      active ? '#ECF3FF' : '#f3f4ff'};
+    active ? '#ECF3FF' : '#f3f4ff'};
     color: #546BFF;
     font-weight: 600;
   }

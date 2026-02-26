@@ -108,7 +108,7 @@ const IconBox = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: #e5e7eb;
+  background: #F6F6F6;
   color: #6b7280;
   display: flex;
   align-items: center;
@@ -133,6 +133,10 @@ const Value = styled.div`
   color: #111827;
 `;
 
+const ValueUnit = styled.span`
+  color: #D6D6D6;
+`;
+
 const Change = styled.span<{ positive?: boolean }>`
   font-size: 16px;
   font-weight: 600;
@@ -149,66 +153,70 @@ const SubText = styled.div`
 `;
 
 export default function ProductivityReport() {
-    return (
-        <Wrapper>
-            <Header>
-                <HeaderLeft>
-                    <IconButton>
-                        <FiMonitor size={20} />
-                    </IconButton>
-                    <Title>Productivity Report</Title>
-                </HeaderLeft>
+  return (
+    <Wrapper>
+      <Header>
+        <HeaderLeft>
+          <IconButton>
+            <FiMonitor size={20} />
+          </IconButton>
+          <Title>Productivity Report</Title>
+        </HeaderLeft>
 
-                <UpgradePlanGroup>
-                    <UpgradeButton>
-                        <FiZap size={16} />
-                        Upgrade Plan
-                    </UpgradeButton>
-                    <MdOutlineKeyboardArrowDown fontSize={30} />
-                </UpgradePlanGroup>
-            </Header>
+        <UpgradePlanGroup>
+          <UpgradeButton>
+            <FiZap size={16} />
+            Upgrade Plan
+          </UpgradeButton>
+          <MdOutlineKeyboardArrowDown fontSize={30} />
+        </UpgradePlanGroup>
+      </Header>
 
-            <Grid>
-                <StatCard
-                    title="Hours Productivity"
-                    value="576 Hrs"
-                    change="15%"
-                    icon={<FiClock />}
-                />
+      <Grid>
+        <StatCard
+          title="Hours Productivity"
+          value="576"
+          unit="Hrs"
+          change="15%"
+          icon={<FiClock />}
+        />
 
-                <StatCard
-                    title="Days Activity"
-                    value="267 Days"
-                    change="15%"
-                    positive
-                    icon={<FiCalendar />}
-                />
+        <StatCard
+          title="Days Activity"
+          value="267"
+          unit="Days"
+          change="15%"
+          positive
+          icon={<FiCalendar />}
+        />
 
-                <StatCard
-                    title="Users"
-                    value="3,836"
-                    change="15%"
-                    icon={<FiUsers />}
-                />
+        <StatCard
+          title="Users"
+          value="3,836"
+          change="15%"
+          icon={<FiUsers />}
+        />
 
-                <StatCard
-                    title="Web Activity"
-                    value="178 Activities"
-                    change="15%"
-                    positive
-                    icon={<FiGlobe />}
-                />
-            </Grid>
-        </Wrapper>
-    );
+        <StatCard
+          title="Web Activity"
+          value="178"
+          unit="Activities"
+          change="15%"
+          positive
+          icon={<FiGlobe />}
+        />
+      </Grid>
+    </Wrapper>
+  );
 }
 
 type StatProps = {
-    title: string;
-    value: string;
-    change: string;
-    positive?: boolean;
-    icon: React.ReactNode;
+  title: string;
+  value: string;
+  unit?: string;
+  change: string;
+  positive?: boolean;
+  icon: React.ReactNode;
 };
 
 const chartPaths = {
@@ -218,7 +226,7 @@ const chartPaths = {
   lineNegative: "M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45",
 };
 
-function StatCard({ title, value, change, positive, icon }: StatProps) {
+function StatCard({ title, value, unit, change, positive, icon }: StatProps) {
   const isPositive = !!positive;
   const slug = title.replace(/\s/g, "");
   const gradientId = (isPositive ? "prodPos" : "prodNeg") + slug;
@@ -236,7 +244,7 @@ function StatCard({ title, value, change, positive, icon }: StatProps) {
           </CardHeader>
 
           <ValueRow>
-            <Value>{value}</Value>
+            <Value>{value}{unit ? <> <ValueUnit>{unit}</ValueUnit></> : null}</Value>
             <Change positive={positive}>
               <span>{positive ? "↑" : "↓"}</span>
               <span>{change}</span>
