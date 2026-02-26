@@ -97,7 +97,7 @@ const Group = styled.div`
 const ChartSvg = styled.svg`
   width: 150px;
   height: 100px;
-  margin-bottom: -25px;
+  
 `
 
 
@@ -427,61 +427,79 @@ type StatProps = {
 };
 
 function StatCard({ title, value, change, positive, icon, showBottomStats = true }: StatProps) {
+    const isPositive = !!positive;
+
+    const areaPath = isPositive
+        ? `
+          M0,40
+          C15,34 25,30 35,26
+          C45,22 60,18 70,14
+          C80,10 90,8 100,6
+          L100,50
+          L0,50
+          Z
+        `
+        : `
+          M0,10
+          C15,12 20,18 30,20
+          C40,22 50,18 60,25
+          C70,32 80,35 100,45
+          L100,50
+          L0,50
+          Z
+        `;
+
+    const linePath = isPositive
+        ? `
+          M0,40
+          C15,34 25,30 35,26
+          C45,22 60,18 70,14
+          C80,10 90,8 100,6
+        `
+        : `
+          M0,10
+          C15,12 20,18 30,20
+          C40,22 50,18 60,25
+          C70,32 80,35 100,45
+        `;
+
+    const gradientId = isPositive ? "statPositiveGradient" : "statNegativeGradient";
+    const color = isPositive ? "#22c55e" : "#ef4444";
+
     return (
         <Card>
             <Group>
-            <div>
-            <CardHeader>
-                <IconBox>{icon}</IconBox>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
+                <div>
+                    <CardHeader>
+                        <IconBox>{icon}</IconBox>
+                        <CardTitle>{title}</CardTitle>
+                    </CardHeader>
 
-            <ValueRow>
-                <Value>{value}</Value>
-                <Change positive={positive}>{change}</Change>
-            </ValueRow>
+                    <ValueRow>
+                        <Value>{value}</Value>
+                        <Change positive={positive}>{change}</Change>
+                    </ValueRow>
 
-            <SubText>Compared to last week</SubText>
+                    <SubText>Compared to last week</SubText>
+                </div>
+                <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor={color} stopOpacity="0.35" />
+                            <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+                        </linearGradient>
+                    </defs>
 
-            </div>
-            <div>
-            <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
-                    </linearGradient>
-                </defs>
+                    <path d={areaPath} fill={`url(#${gradientId})`} />
 
-                {/* area fill */}
-                <path
-                    d="
-            M0,40
-            C15,34 25,30 35,26
-            C45,22 60,18 70,14
-            C80,10 90,8 100,6
-            L100,50
-            L0,50
-            Z
-          "
-                    fill="url(#positiveGradient)"
-                />
-
-                {/* line */}
-                <path
-                    d="
-            M0,40
-            C15,34 25,30 35,26
-            C45,22 60,18 70,14
-            C80,10 90,8 100,6
-          "
-                    fill="none"
-                    stroke="#22c55e"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                />
-            </ChartSvg>
-            </div>
+                    <path
+                        d={linePath}
+                        fill="none"
+                        stroke={color}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                    />
+                </ChartSvg>
             </Group>
 
             {showBottomStats && (
