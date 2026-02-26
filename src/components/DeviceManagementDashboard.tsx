@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { FiMonitor, FiUsers, FiMail, FiDownload } from "react-icons/fi";
+import { FiMonitor, FiUsers, FiMail, FiDownload, FiZap, FiActivity, FiPower, FiSend, FiInbox } from "react-icons/fi";
 import { MdOutlineKeyboardArrowDown, MdMarkEmailRead, MdDrafts } from "react-icons/md";
-import { FiZap } from "react-icons/fi";
 import { GiUnplugged } from "react-icons/gi";
 import { FaApple, FaWindows, FaBuilding } from "react-icons/fa";
 import { PiLinuxLogoThin } from "react-icons/pi";
@@ -69,6 +68,7 @@ const UpgradeButton = styled.button`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
   gap: 10px;
 
   @media (max-width: 1200px) {
@@ -80,22 +80,31 @@ const Grid = styled.div`
   }
 `;
 
-const StackedCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;
-
-  & > div {
-    flex: 1;
-  }
-`;
-
 const Card = styled.div`
   background: white;
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+`;
+
+const TallCard = styled(Card)`
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+`;
+
+const StackedCol = styled.div`
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+
+  & > div {
+    flex: 1;
+    min-height: 0;
+  }
 `;
 
 const Group = styled.div`
@@ -116,25 +125,6 @@ const ChartSvg = styled.svg`
   height: 100px;
 `
 
-
-const LargeCard = styled(Card)`
-  grid-column: span 1;
-`;
-
-const LargeCardCol1 = styled(LargeCard)`
-  grid-column: 1;
-  grid-row: 2;
-`;
-
-const LargeCardCol2 = styled(LargeCard)`
-  grid-column: 2;
-  grid-row: 2;
-`;
-
-const LargeCardCol3 = styled(LargeCard)`
-  grid-column: 3;
-  grid-row: 2;
-`;
 
 const EmailStatusRow = styled.div`
   display: flex;
@@ -316,27 +306,147 @@ export default function DeviceManagementDashboard() {
             </Header>
 
             <Grid>
-                <StatCard
-                    title="Number Of Devices"
-                    value="3,836"
-                    change="15%"
-                    positive
-                    icon={<FiMonitor />}
-                />
+                <TallCard>
+                    <StatBlock
+                        title="Number Of Devices"
+                        value="3,836"
+                        change="15%"
+                        positive
+                        icon={<FiMonitor />}
+                    />
+                    <Divider />
+                    <BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Plugged
+                            </MiniLabel>
+                            <MiniValue>1,923</MiniValue>
+                        </MiniStat>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Unplugged
+                            </MiniLabel>
+                            <MiniValue>1,913</MiniValue>
+                        </MiniStat>
+                    </BottomStats>
+                    <Divider />
+                    <DeviceTypesRow>
+                        <DeviceTypeSection>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><FaWindows size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Windows</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,403 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><FaApple size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Mac</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>632 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><PiLinuxLogoThin size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Linux</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,801 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                    </DeviceTypesRow>
+                </TallCard>
 
-                <StatCard
-                    title="Users"
-                    value="3,836"
-                    change="15%"
-                    icon={<FiUsers />}
-                />
+                <TallCard>
+                    <StatBlock
+                        title="Users"
+                        value="3,836"
+                        change="15%"
+                        icon={<FiUsers />}
+                    />
+                    <Divider />
+                    <BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton style={{ color: "#22c55e" }}><FiActivity size={16} /></IconButton>
+                                Active
+                            </MiniLabel>
+                            <MiniValue>592</MiniValue>
+                        </MiniStat>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton style={{ color: "#ef4444" }}><FiPower size={16} /></IconButton>
+                                Offline
+                            </MiniLabel>
+                            <MiniValue>3,836</MiniValue>
+                        </MiniStat>
+                    </BottomStats>
+                    <Divider />
+                    <DeviceTypesRow>
+                        <DeviceTypeSection>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><FaBuilding size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Organizations</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,403 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><FiUsers size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Departments</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>632 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon><FiUsers size={20} /></DeviceTypeIcon>
+                                <DeviceTypeName>Groups</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,801 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                    </DeviceTypesRow>
+                </TallCard>
 
-                <StatCard
-                    title="Emails"
-                    value="316"
-                    change="23%"
-                    icon={<FiMail />}
-                />
+                <TallCard>
+                    <StatBlock
+                        title="Emails"
+                        value="316"
+                        change="23%"
+                        icon={<FiMail />}
+                    />
+                    <Divider />
+                    <BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><FiSend size={16} /></IconButton>
+                                Sent
+                            </MiniLabel>
+                            <MiniValue>592</MiniValue>
+                        </MiniStat>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><FiInbox size={16} /></IconButton>
+                                Received
+                            </MiniLabel>
+                            <MiniValue>3,836</MiniValue>
+                        </MiniStat>
+                    </BottomStats>
+                    <Divider />
+                    <EmailStatusRow>
+                        <EmailStatusSection>
+                            <EmailStatusTop>
+                                <EmailStatusLabel><MdMarkEmailRead /> Read</EmailStatusLabel>
+                                <EmailStatusValue>1,403 emails</EmailStatusValue>
+                            </EmailStatusTop>
+                        </EmailStatusSection>
+                        <EmailStatusSection hasDivider>
+                            <EmailStatusTop>
+                                <EmailStatusLabel><MdDrafts /> Unread</EmailStatusLabel>
+                                <EmailStatusValue>632 emails</EmailStatusValue>
+                            </EmailStatusTop>
+                        </EmailStatusSection>
+                    </EmailStatusRow>
+                </TallCard>
 
                 <StackedCol>
                     <StatCard
@@ -355,91 +465,6 @@ export default function DeviceManagementDashboard() {
                         showBottomStats={false}
                     />
                 </StackedCol>
-
-                <LargeCardCol1>
-                    <DeviceTypesRow>
-                        <DeviceTypeSection>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <FaWindows size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Windows</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>1,403 devices</DeviceTypeCount>
-                        </DeviceTypeSection>
-                        <DeviceTypeSection hasDivider>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <FaApple size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Mac</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>632 devices</DeviceTypeCount>
-                        </DeviceTypeSection>
-                        <DeviceTypeSection hasDivider>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <PiLinuxLogoThin size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Linux</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>1,801 devices</DeviceTypeCount>
-                        </DeviceTypeSection>
-                    </DeviceTypesRow>
-                </LargeCardCol1>
-
-                <LargeCardCol2>
-                    <DeviceTypesRow>
-                        <DeviceTypeSection>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <FaBuilding size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Organizations</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>1,403 users</DeviceTypeCount>
-                        </DeviceTypeSection>
-                        <DeviceTypeSection hasDivider>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <FiUsers size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Departments</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>632 users</DeviceTypeCount>
-                        </DeviceTypeSection>
-                        <DeviceTypeSection hasDivider>
-                            <DeviceTypeTop>
-                                <DeviceTypeIcon>
-                                    <FiUsers size={20} />
-                                </DeviceTypeIcon>
-                                <DeviceTypeName>Groups</DeviceTypeName>
-                            </DeviceTypeTop>
-                            <DeviceTypeCount>1,801 users</DeviceTypeCount>
-                        </DeviceTypeSection>
-                    </DeviceTypesRow>
-                </LargeCardCol2>
-
-                <LargeCardCol3>
-                    <EmailStatusRow>
-                        <EmailStatusSection>
-                            <EmailStatusTop>
-                                <EmailStatusLabel>
-                                    <MdMarkEmailRead /> Read
-                                </EmailStatusLabel>
-                                <EmailStatusValue>1,403 emails</EmailStatusValue>
-                            </EmailStatusTop>
-                        </EmailStatusSection>
-                        <EmailStatusSection hasDivider>
-                            <EmailStatusTop>
-                                <EmailStatusLabel>
-                                    <MdDrafts /> Unread
-                                </EmailStatusLabel>
-                                <EmailStatusValue>632 emails</EmailStatusValue>
-                            </EmailStatusTop>
-                        </EmailStatusSection>
-                    </EmailStatusRow>
-                </LargeCardCol3>
             </Grid>
         </Wrapper>
     );
@@ -454,107 +479,76 @@ type StatProps = {
     showBottomStats?: boolean;
 };
 
+const chartPaths = {
+  areaPositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6 L100,50 L0,50 Z`,
+  areaNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45 L100,50 L0,50 Z`,
+  linePositive: `M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6`,
+  lineNegative: `M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45`,
+};
+
+function StatBlock({ title, value, change, positive, icon }: Omit<StatProps, "showBottomStats">) {
+  const isPositive = !!positive;
+  const slug = title.replace(/\s/g, "");
+  const gradientId = (isPositive ? "statPos" : "statNeg") + slug;
+  const color = isPositive ? "#22c55e" : "#ef4444";
+  const areaPath = isPositive ? chartPaths.areaPositive : chartPaths.areaNegative;
+  const linePath = isPositive ? chartPaths.linePositive : chartPaths.lineNegative;
+
+  return (
+    <Group>
+      <GroupReader>
+        <CardHeader>
+          <IconBox>{icon}</IconBox>
+          <CardTitle>{title}</CardTitle>
+        </CardHeader>
+        <ValueRow>
+          <Value>{value}</Value>
+          <Change positive={positive}>
+            <span>{positive ? "↑" : "↓"}</span>
+            <span>{change}</span>
+          </Change>
+        </ValueRow>
+        <SubText>Compared to last week</SubText>
+      </GroupReader>
+      <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity="0.35" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+          </linearGradient>
+        </defs>
+        <path d={areaPath} fill={`url(#${gradientId})`} />
+        <path d={linePath} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      </ChartSvg>
+    </Group>
+  );
+}
+
 function StatCard({ title, value, change, positive, icon, showBottomStats = true }: StatProps) {
-    const isPositive = !!positive;
-
-    const areaPath = isPositive
-        ? `
-          M0,40
-          C15,34 25,30 35,26
-          C45,22 60,18 70,14
-          C80,10 90,8 100,6
-          L100,50
-          L0,50
-          Z
-        `
-        : `
-          M0,10
-          C15,12 20,18 30,20
-          C40,22 50,18 60,25
-          C70,32 80,35 100,45
-          L100,50
-          L0,50
-          Z
-        `;
-
-    const linePath = isPositive
-        ? `
-          M0,40
-          C15,34 25,30 35,26
-          C45,22 60,18 70,14
-          C80,10 90,8 100,6
-        `
-        : `
-          M0,10
-          C15,12 20,18 30,20
-          C40,22 50,18 60,25
-          C70,32 80,35 100,45
-        `;
-
-    const gradientId = isPositive ? "statPositiveGradient" : "statNegativeGradient";
-    const color = isPositive ? "#22c55e" : "#ef4444";
-
-    return (
-        <Card>
-            <Group>
-                <GroupReader>
-                    <CardHeader>
-                        <IconBox>{icon}</IconBox>
-                        <CardTitle>{title}</CardTitle>
-                    </CardHeader>
-
-                    <ValueRow>
-                        <Value>{value}</Value>
-                        <Change positive={positive}>
-                            <span>{positive ? "↑" : "↓"}</span>
-                            <span>{change}</span>
-                        </Change>
-                    </ValueRow>
-
-                    <SubText>Compared to last week</SubText>
-                </GroupReader>
-                <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={color} stopOpacity="0.35" />
-                            <stop offset="100%" stopColor={color} stopOpacity="0.05" />
-                        </linearGradient>
-                    </defs>
-
-                    <path d={areaPath} fill={`url(#${gradientId})`} />
-
-                    <path
-                        d={linePath}
-                        fill="none"
-                        stroke={color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                    />
-                </ChartSvg>
-            </Group>
-
-            {showBottomStats && (
-                <>
-                    <Divider />
-                    <BottomStats>
-                        <MiniStat>
-                            <MiniLabel>
-                                <IconButton><GiUnplugged size={16} /></IconButton>
-                                Plugged
-                            </MiniLabel>
-                            <MiniValue>1,923</MiniValue>
-                        </MiniStat>
-
-                        <MiniStat>
-                            <MiniLabel>
-                                <IconButton><GiUnplugged size={16} /></IconButton>
-                                Unplugged
-                            </MiniLabel>
-                            <MiniValue>1,913</MiniValue>
-                        </MiniStat>
-                    </BottomStats>
-                </>
-            )}
-        </Card>
-    );
+  return (
+    <Card>
+      <StatBlock title={title} value={value} change={change} positive={positive} icon={icon} />
+      {showBottomStats && (
+        <>
+          <Divider />
+          <BottomStats>
+            <MiniStat>
+              <MiniLabel>
+                <IconButton><GiUnplugged size={16} /></IconButton>
+                Plugged
+              </MiniLabel>
+              <MiniValue>1,923</MiniValue>
+            </MiniStat>
+            <MiniStat>
+              <MiniLabel>
+                <IconButton><GiUnplugged size={16} /></IconButton>
+                Unplugged
+              </MiniLabel>
+              <MiniValue>1,913</MiniValue>
+            </MiniStat>
+          </BottomStats>
+        </>
+      )}
+    </Card>
+  );
 }
