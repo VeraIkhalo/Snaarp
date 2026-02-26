@@ -108,7 +108,7 @@ const LargeCardCol3 = styled(LargeCard)`
 
 const EmailStatusRow = styled.div`
   display: flex;
-  align-items: stretch;
+  align-items: center;
   min-height: 72px;
 `;
 
@@ -117,30 +117,31 @@ const EmailStatusSection = styled.div<{ hasDivider?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 12px 14px;
+  align-items:center;
+  padding: 10px;
   border-left: ${({ hasDivider }) => (hasDivider ? "1px solid #e5e7eb" : "none")};
 `;
 
 const EmailStatusTop = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
-  margin-bottom: 4px;
 `;
 
 const EmailStatusLabel = styled.span`
-  font-size: 13px;
-  color: #6b7280;
+  font-size: 12px;
+  color: #111827;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
 `;
 
 const EmailStatusValue = styled.div`
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
   color: #111827;
+  font-weight: bold;
 `;
 
 const DeviceTypesRow = styled.div`
@@ -381,7 +382,7 @@ export default function DeviceManagementDashboard() {
                         <EmailStatusSection>
                             <EmailStatusTop>
                                 <EmailStatusLabel>
-                                    <MdMarkEmailRead size={18} style={{ color: "#6b7280" }} /> Read
+                                    <MdMarkEmailRead /> Read
                                 </EmailStatusLabel>
                                 <EmailStatusValue>1,403 emails</EmailStatusValue>
                             </EmailStatusTop>
@@ -389,7 +390,7 @@ export default function DeviceManagementDashboard() {
                         <EmailStatusSection hasDivider>
                             <EmailStatusTop>
                                 <EmailStatusLabel>
-                                    <MdDrafts size={18} style={{ color: "#6b7280" }} /> Unread
+                                    <MdDrafts /> Unread
                                 </EmailStatusLabel>
                                 <EmailStatusValue>632 emails</EmailStatusValue>
                             </EmailStatusTop>
