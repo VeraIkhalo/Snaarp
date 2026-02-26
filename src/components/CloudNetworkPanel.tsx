@@ -63,6 +63,7 @@ const IconButton = styled.button`
   background: #F6F6F6;
   color: #6b7280;
   border-radius: 8px;
+  
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 `
