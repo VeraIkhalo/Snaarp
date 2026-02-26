@@ -3,6 +3,9 @@ import { FiMonitor, FiUsers, FiMail, FiDownload } from "react-icons/fi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FiZap } from "react-icons/fi";
 import { GiUnplugged } from "react-icons/gi";
+import { FaApple } from "react-icons/fa";
+import { FaWindows } from "react-icons/fa";
+import { PiLinuxLogoThin } from "react-icons/pi";
 
 const Wrapper = styled.div`
   background: #F6F6F6;
@@ -81,12 +84,55 @@ const Grid = styled.div`
 const Card = styled.div`
   background: white;
   border-radius: 8px;
-  padding: 18px;
+  padding: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 `;
 
 const LargeCard = styled(Card)`
   grid-column: span 1;
+`;
+
+const DeviceTypesRow = styled.div`
+  display: flex;
+  align-items: stretch;
+  min-height: 72px;
+`;
+
+const DeviceTypeSection = styled.div<{ hasDivider?: boolean }>`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 12px;
+  border-left: ${({ hasDivider }) => (hasDivider ? "1px solid #e5e7eb" : "none")};
+`;
+
+const DeviceTypeTop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+`;
+
+const DeviceTypeIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+`;
+
+const DeviceTypeName = styled.span`
+  font-size: 12px;
+  color: #111827;
+  font-weight: 500;
+`;
+
+const DeviceTypeCount = styled.div`
+  font-size: 14px;
+  color: #111827;
+  font-weight: bold;
 `;
 
 const CardHeader = styled.div`
@@ -120,10 +166,6 @@ const ValueRow = styled.div`
 const Value = styled.div`
   font-size: 24px;
   font-weight: 700;
-`;
-
-const LargeValue = styled(Value)`
-  margin-top: 8px;
 `;
 
 const Change = styled.span<{ positive?: boolean }>`
@@ -219,10 +261,35 @@ export default function DeviceManagementDashboard() {
                 />
 
                 <LargeCard>
-                    <CardTitle>Number of Downloads</CardTitle>
-                    <LargeValue>316</LargeValue>
-                    <Change positive>23%</Change>
-                    <SubText>Compared to last week</SubText>
+                    <DeviceTypesRow>
+                        <DeviceTypeSection>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                <FaWindows />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Windows</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,403 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                <FaApple />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Mac</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>632 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                <PiLinuxLogoThin />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Linux</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,801 devices</DeviceTypeCount>
+                        </DeviceTypeSection>
+                    </DeviceTypesRow>
                 </LargeCard>
             </Grid>
         </Wrapper>
