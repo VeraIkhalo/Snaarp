@@ -28,11 +28,11 @@ const PanelBody = styled.div`
 
 
 type MetricCardProps = {
-  title: string
-  value: string
-  change: string
-  positive: boolean
-  points: number[]
+    title: string
+    value: string
+    change: string
+    positive: boolean
+    points: number[]
 }
 
 const StorageIcon = styled.div`
@@ -153,19 +153,19 @@ const ChartSvg = styled.svg`
 `
 
 const MiniChart = ({ positive }: { positive: boolean }) => {
-  if (positive) {
-    return (
-      <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
+    if (positive) {
+        return (
+            <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
+                    </linearGradient>
+                </defs>
 
-        {/* area fill */}
-        <path
-          d="
+                {/* area fill */}
+                <path
+                    d="
             M0,40
             C15,34 25,30 35,26
             C45,22 60,18 70,14
@@ -174,38 +174,38 @@ const MiniChart = ({ positive }: { positive: boolean }) => {
             L0,50
             Z
           "
-          fill="url(#positiveGradient)"
-        />
+                    fill="url(#positiveGradient)"
+                />
 
-        {/* line */}
-        <path
-          d="
+                {/* line */}
+                <path
+                    d="
             M0,40
             C15,34 25,30 35,26
             C45,22 60,18 70,14
             C80,10 90,8 100,6
           "
-          fill="none"
-          stroke="#22c55e"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </ChartSvg>
-    )
-  }
+                    fill="none"
+                    stroke="#22c55e"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                />
+            </ChartSvg>
+        )
+    }
 
-  return (
-    <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="emailGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.05" />
-        </linearGradient>
-      </defs>
+    return (
+        <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="emailGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#ef4444" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#ef4444" stopOpacity="0.05" />
+                </linearGradient>
+            </defs>
 
-      {/* area fill */}
-      <path
-        d="
+            {/* area fill */}
+            <path
+                d="
           M0,10
           C15,12 20,18 30,20
           C40,22 50,18 60,25
@@ -214,57 +214,57 @@ const MiniChart = ({ positive }: { positive: boolean }) => {
           L0,50
           Z
         "
-        fill="url(#emailGradient)"
-      />
+                fill="url(#emailGradient)"
+            />
 
-      {/* line */}
-      <path
-        d="
+            {/* line */}
+            <path
+                d="
           M0,10
           C15,12 20,18 30,20
           C40,22 50,18 60,25
           C70,32 80,35 100,45
         "
-        fill="none"
-        stroke="#ef4444"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </ChartSvg>
-  )
+                fill="none"
+                stroke="#ef4444"
+                strokeWidth="2"
+                strokeLinecap="round"
+            />
+        </ChartSvg>
+    )
 }
 
 function MetricCardView({
-  title,
-  value,
-  change,
-  positive,
-  icon
+    title,
+    value,
+    change,
+    positive,
+    icon
 }: MetricCardProps & { icon?: ReactNode }) {
 
 
-  return (
-    <MetricCard>
-      <MetricTitleRow>
-        <MetricTitleLeft>
-          {icon && <MetricIcon aria-hidden="true">{icon}</MetricIcon>}
-          <MetricLabel>{title}</MetricLabel>
-        </MetricTitleLeft>
-      </MetricTitleRow>
+    return (
+        <MetricCard>
+            <MetricTitleRow>
+                <MetricTitleLeft>
+                    {icon && <MetricIcon aria-hidden="true">{icon}</MetricIcon>}
+                    <MetricLabel>{title}</MetricLabel>
+                </MetricTitleLeft>
+            </MetricTitleRow>
 
-      <MetricMainRow>
-        <MetricValue>
-          <MetricNumber>{value}</MetricNumber>
-          <MetricChange positive={positive}>
-            {positive ? '↑' : '↓'} {change}
-          </MetricChange>
-        </MetricValue>
-        <MiniChart positive={positive} />
-      </MetricMainRow>
+            <MetricMainRow>
+                <MetricValue>
+                    <MetricNumber>{value}</MetricNumber>
+                    <MetricChange positive={positive}>
+                        {positive ? '↑' : '↓'} {change}
+                    </MetricChange>
+                </MetricValue>
+                <MiniChart positive={positive} />
+            </MetricMainRow>
 
-      <MetricFooter>Compared to last week</MetricFooter>
-    </MetricCard>
-  )
+            <MetricFooter>Compared to last week</MetricFooter>
+        </MetricCard>
+    )
 }
 
 
@@ -393,117 +393,114 @@ const UpgradeButton = styled.button`
 
 
 export function CloudNetworkPanel() {
-  const metrics: (MetricCardProps & { icon: ReactNode })[] = [
-    {
-      title: 'Users',
-      value: '3,836',
-      change: '15%',
-      positive: false,
-      points: [80, 78, 76, 70, 68, 65],
-      icon: (
-        <LuUser />
-      )
-    },
-    {
-      title: 'Groups',
-      value: '316',
-      change: '23%',
-      positive: true,
-      points: [30, 34, 38, 40, 44, 48],
-      icon: (
-        <MdGroups />
-      )
-    },
-    {
-      title: 'Uploads',
-      value: '316',
-      change: '23%',
-      positive: true,
-      points: [20, 24, 30, 32, 36, 40],
-      icon: (
-        <MdUpload />
-      )
-    },
-    {
-      title: 'Departments',
-      value: '316',
-      change: '23%',
-      positive: false,
-      points: [50, 48, 44, 40, 36, 32],
-      icon: (
-        <FcDepartment />
-      )
-    }
-  ]
+    const metrics: (MetricCardProps & { icon: ReactNode })[] = [
+        {
+            title: 'Users',
+            value: '3,836',
+            change: '15%',
+            positive: false,
+            points: [80, 78, 76, 70, 68, 65],
+            icon: (
+                <LuUser />
+            )
+        },
+        {
+            title: 'Groups',
+            value: '316',
+            change: '23%',
+            positive: true,
+            points: [30, 34, 38, 40, 44, 48],
+            icon: (
+                <MdGroups />
+            )
+        },
+        {
+            title: 'Uploads',
+            value: '316',
+            change: '23%',
+            positive: true,
+            points: [20, 24, 30, 32, 36, 40],
+            icon: (
+                <MdUpload />
+            )
+        },
+        {
+            title: 'Departments',
+            value: '316',
+            change: '23%',
+            positive: false,
+            points: [50, 48, 44, 40, 36, 32],
+            icon: (
+                <FcDepartment />
+            )
+        }
+    ]
 
-  const storageData = [
-    { label: 'Files', color: '#9333ea', percentage: 15 },
-    { label: 'Folders', color: '#f97316', percentage: 12 },
-    { label: 'Videos', color: '#10b981', percentage: 18 },
-    { label: 'Apps', color: '#3b82f6', percentage: 10 },
-    { label: 'Audios', color: '#ef4444', percentage: 12 },
-    { label: 'Miscellaneous', color: '#1e40af', percentage: 13 },
-    { label: 'Available Space', color: '#e5e7eb', percentage: 20 }
-  ]
+    const storageData = [
+        { label: 'Files', color: '#9333ea', percentage: 15 },
+        { label: 'Folders', color: '#f97316', percentage: 12 },
+        { label: 'Videos', color: '#10b981', percentage: 18 },
+        { label: 'Apps', color: '#3b82f6', percentage: 10 },
+        { label: 'Audios', color: '#ef4444', percentage: 12 },
+        { label: 'Miscellaneous', color: '#1e40af', percentage: 13 },
+        { label: 'Available Space', color: '#e5e7eb', percentage: 20 }
+    ]
 
-  return (
-    <Panel aria-label="Cloud network overview">
-      <PanelBody>
-        <MetricsGrid>
-          {metrics.map(metric => (
-            <MetricCardView key={metric.title} {...metric} icon={metric.icon} />
-          ))}
-        </MetricsGrid>
+    return (
+        <Panel aria-label="Cloud network overview">
+            <PanelBody>
+                <MetricsGrid>
+                    {metrics.map(metric => (
+                        <MetricCardView key={metric.title} {...metric} icon={metric.icon} />
+                    ))}
+                </MetricsGrid>
 
-        <StorageColumn>
-          <StorageCard>
+                <StorageColumn>
+                    <StorageCard>
 
-            <ChartContainer>
-              <ChartWrapper>
-                <StorageIcon>
-                  <IconButton>
-                    <GrStorage />
-                  </IconButton>
-                  <StorageTitle>Storage</StorageTitle>
-                </StorageIcon>
-                <img src={StorageImg} alt="Storage" />
-              </ChartWrapper>
-            </ChartContainer>
+                        <ChartContainer>
+                            <ChartWrapper>
+                                <StorageIcon>
+                                    <IconButton>
+                                        <GrStorage />
+                                    </IconButton>
+                                    <StorageTitle>Storage</StorageTitle>
+                                </StorageIcon>
+                                <img src={StorageImg} alt="Storage" />
+                            </ChartWrapper>
+                        </ChartContainer>
 
-            <StorageInfo>
-              <NoteAlert>
-                <NoteHeader>
-                  <NoteIcon>!</NoteIcon>
-                  <NoteTitle>Note</NoteTitle>
-                </NoteHeader>
-                <NoteText>You've almost reached your limit</NoteText>
-                <NoteDescription>
-                  You have used 80% of your available storage. Upgrade plan to
-                  access more space.
-                </NoteDescription>
-              </NoteAlert>
+                        <StorageInfo>
+                            <NoteAlert>
+                                <NoteHeader>
+                                    <NoteIcon>!</NoteIcon>
+                                    <NoteTitle>Note</NoteTitle>
+                                </NoteHeader>
+                                <NoteText>You've almost reached your limit</NoteText>
+                                <NoteDescription>
+                                    You have used 80% of your available storage. Upgrade plan to
+                                    access more space.
+                                </NoteDescription>
+                            </NoteAlert>
 
-              <Legend>
-                {storageData.map(item => (
-                  <LegendItem key={item.label}>
-                    <LegendDot color={item.color} />
-                    <span>{item.label}</span>
-                  </LegendItem>
-                ))}
-              </Legend>
+                            <Legend>
+                                {storageData.map(item => (
+                                    <LegendItem key={item.label}>
+                                        <LegendDot color={item.color} />
+                                        <span>{item.label}</span>
+                                    </LegendItem>
+                                ))}
+                            </Legend>
+                        </StorageInfo>
 
+                    </StorageCard>
+                    <UpgradeButton type="button">
+                        <FiZap />
+                        Upgrade Plan
+                    </UpgradeButton>
+                </StorageColumn>
 
-            </StorageInfo>
-
-          </StorageCard>
-          <UpgradeButton type="button">
-            <FiZap />
-            Upgrade Plan
-          </UpgradeButton>
-        </StorageColumn>
-
-      </PanelBody>
-    </Panel>
-  )
+            </PanelBody>
+        </Panel>
+    )
 }
-

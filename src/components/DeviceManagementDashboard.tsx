@@ -94,6 +94,13 @@ const Group = styled.div`
 `;
 
 
+const ChartSvg = styled.svg`
+  width: 150px;
+  height: 100px;
+  margin-bottom: -25px;
+`
+
+
 const LargeCard = styled(Card)`
   grid-column: span 1;
 `;
@@ -309,14 +316,14 @@ export default function DeviceManagementDashboard() {
                 <StatCard
                     title="Emails"
                     value="316"
-                    change="-23%"
+                    change="↑23%"
                     icon={<FiMail />}
                 />
 
                 <StatCard
                     title="Number of Apps"
                     value="316"
-                    change="-23%"
+                    change="↑23%"
                     icon={<FiDownload />}
                 />
 
@@ -435,7 +442,44 @@ function StatCard({ title, value, change, positive, icon }: StatProps) {
             <SubText>Compared to last week</SubText>
 
             </div>
-            <div>gshgsgsgsghsg</div>
+            <div>
+            <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
+                    </linearGradient>
+                </defs>
+
+                {/* area fill */}
+                <path
+                    d="
+            M0,40
+            C15,34 25,30 35,26
+            C45,22 60,18 70,14
+            C80,10 90,8 100,6
+            L100,50
+            L0,50
+            Z
+          "
+                    fill="url(#positiveGradient)"
+                />
+
+                {/* line */}
+                <path
+                    d="
+            M0,40
+            C15,34 25,30 35,26
+            C45,22 60,18 70,14
+            C80,10 90,8 100,6
+          "
+                    fill="none"
+                    stroke="#22c55e"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                />
+            </ChartSvg>
+            </div>
             </Group>
             <Divider />
 
