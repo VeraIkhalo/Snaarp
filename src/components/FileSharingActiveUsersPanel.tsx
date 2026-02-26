@@ -1,4 +1,13 @@
 import styled from 'styled-components'
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
 import { VscGraph } from "react-icons/vsc";
 import { BsGraphUp } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -20,7 +29,7 @@ const Row = styled.section`
 const Card = styled.article`
   background: #ffffff;
   border-radius: 16px;
-  border: 1px solid #e5e7e
+  border: 1px solid #e5e7eb;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
   padding: 18px 22px 20px;
 `
@@ -55,7 +64,7 @@ const MonthSelect = styled.div`
   height: 40px;
   padding: 0 12px;
   border-radius: 8px;
-   border: 2px solid #F5F5F5;
+  border: 2px solid #F5F5F5;
   background: transparent;
   display: flex;
   align-items: center;
@@ -122,22 +131,52 @@ const FileSharingBody = styled.div`
 `
 
 const ChartWrapper = styled.div`
-  background: #f9fafb;
   border-radius: 12px;
   padding: 16px 16px 12px;
+  width: 100%;
+  height: 250px;
+  margin-top:-30px;
 `
 
-const ChartSvg = styled.svg`
-  width: 100%;
-  height: 140px;
+const TooltipBox = styled.div`
+  background: #BFBFBF;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+`
+
+const TooltipTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+`
+
+const TooltipRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+`
+
+const TooltipDot = styled.span<{ color: string }>`
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: ${({ color }) => color};
 `
 
 const LegendRow = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-top: 10px;
-  font-size: 11px;
-  color: #6b7280;
+  margin-top: 12px;
+  padding-top: 8px;
+  justify-content: center;
+  font-size: 12px;
+  color: #374151;
 `
 
 const LegendItem = styled.div`
@@ -146,12 +185,89 @@ const LegendItem = styled.div`
   gap: 6px;
 `
 
-const LegendDot = styled.span<{ color: string }>`
+const LegendSquare = styled.span<{ color: string }>`
   width: 10px;
   height: 10px;
-  border-radius: 999px;
-  background-color: ${({ color }) => color};
+  border-radius: 2px;
+  background: ${({ color }) => color};
 `
+
+const fileSharingChartData = [
+  { name: 'JAN', Public: 45, 'Anyone with link': 25, 'Within Organisation': 35 },
+  { name: 'FEB', Public: 60, 'Anyone with link': 35, 'Within Organisation': 55 },
+  { name: 'MAR', Public: 48, 'Anyone with link': 30, 'Within Organisation': 40 },
+  { name: 'APR', Public: 45, 'Anyone with link': 28, 'Within Organisation': 38 },
+  { name: 'MAY', Public: 70, 'Anyone with link': 50, 'Within Organisation': 60 },
+  { name: 'JUN', Public: 80, 'Anyone with link': 55, 'Within Organisation': 65 },
+  { name: 'JUL', Public: 60, 'Anyone with link': 50, 'Within Organisation': 55 },
+  { name: 'AUG', Public: 48, 'Anyone with link': 22, 'Within Organisation': 40 },
+  { name: 'SEP', Public: 45, 'Anyone with link': 30, 'Within Organisation': 35 },
+  { name: 'OCT', Public: 48, 'Anyone with link': 35, 'Within Organisation': 40 },
+  { name: 'NOV', Public: 65, 'Anyone with link': 40, 'Within Organisation': 55 },
+  { name: 'DEC', Public: 48, 'Anyone with link': 22, 'Within Organisation': 40 },
+]
+
+const COLORS = {
+  public: '#2A30D8',
+  link: '#3641F5',
+  org: '#5268FF',
+}
+
+const MONTH_LABELS: Record<string, string> = {
+  JAN: 'JANUARY', FEB: 'FEBRUARY', MAR: 'MARCH', APR: 'APRIL', MAY: 'MAY', JUN: 'JUNE',
+  JUL: 'JULY', AUG: 'AUGUST', SEP: 'SEPTEMBER', OCT: 'OCTOBER', NOV: 'NOVEMBER', DEC: 'DECEMBER',
+}
+
+function FileSharingTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ name: string; value: number; color: string }>; label?: string }) {
+  if (!active || !payload?.length || !label) return null
+  const item = payload[0]
+  const title = MONTH_LABELS[label] || label
+  const color = item.name === 'Public' ? COLORS.public : item.name === 'Anyone with link' ? COLORS.link : COLORS.org
+  return (
+    <TooltipBox>
+      <TooltipTitle>{title}</TooltipTitle>
+      <TooltipRow>
+        <TooltipDot color={color} />
+        <span>{item.name}: {item.value}</span>
+      </TooltipRow>
+    </TooltipBox>
+  )
+}
+
+function BarWithShadow(props: {
+  x?: number
+  y?: number
+  width?: number
+  height?: number
+  fill?: string
+  radius?: number
+}) {
+  const { x = 0, y = 0, width = 0, height = 0, fill = '#2563eb', radius = 6 } = props
+  if (height <= 0) return null
+  const offset = 1.2
+  return (
+    <g>
+      <rect
+        x={x + offset}
+        y={y + offset}
+        width={width}
+        height={height}
+        rx={radius}
+        ry={radius}
+        fill="rgba(0,0,0,0.07)"
+      />
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        rx={radius}
+        ry={radius}
+        fill={fill}
+      />
+    </g>
+  )
+}
 
 const ActiveUsersBody = styled.div`
   display: grid;
@@ -284,29 +400,6 @@ const users: UserStat[] = [
 ]
 
 export function FileSharingActiveUsersPanel() {
-  const months = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC'
-  ]
-
-  const values = [20, 32, 28, 40, 50, 80, 60, 55, 58, 62, 54, 49]
-
-  const max = 100
-  const barWidth = 18
-  const gap = 10
-  const chartHeight = 90
-  const baseY = 100
-
   return (
     <Row aria-label="File sharing and active users">
       <Card>
@@ -317,7 +410,7 @@ export function FileSharingActiveUsersPanel() {
                 <IconBox><FaRegFileVideo /></IconBox>
                 <Title>File Sharing</Title>
               </HeaderLeft>
-              <CardSubtitle>Keep track of files and how they are shared</CardSubtitle>
+              <CardSubtitle>Keep track of files and how they're shared</CardSubtitle>
             </HeaderLeftGroup>
 
             <HeaderRight>
@@ -332,92 +425,63 @@ export function FileSharingActiveUsersPanel() {
         </CardHeader>
         <FileSharingBody>
           <ChartWrapper>
-            <ChartSvg viewBox="0 0 260 120" preserveAspectRatio="none">
-              {/* horizontal grid lines */}
-              {[0, 25, 50, 75, 100].map((y, idx) => (
-                <line
-                  key={y}
-                  x1="0"
-                  x2="260"
-                  y1={baseY - (y / max) * chartHeight}
-                  y2={baseY - (y / max) * chartHeight}
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={fileSharingChartData}
+                margin={{ top: 16, right: 16, left: 4, bottom: 8 }}
+                barGap={6}
+                barCategoryGap={14}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
                   stroke="#e5e7eb"
-                  strokeWidth={idx === 0 ? 1.2 : 0.6}
+                  strokeWidth={1}
                 />
-              ))}
-
-              {/* bars */}
-              {values.map((val, i) => {
-                const height = (val / max) * chartHeight
-                const x = i * (barWidth + gap) + 8
-                const isJune = i === 5
-                return (
-                  <g key={months[i]}>
-                    <rect
-                      x={x}
-                      y={baseY - height}
-                      width={barWidth}
-                      height={height}
-                      rx="4"
-                      fill={isJune ? '#2563eb' : '#3b82f6'}
-                    />
-                    {isJune && (
-                      <g>
-                        <rect
-                          x={x - 6}
-                          y={baseY - height - 32}
-                          width={barWidth + 18}
-                          height="22"
-                          rx="6"
-                          fill="#111827"
-                          opacity="0.9"
-                        />
-                        <text
-                          x={x + barWidth / 2 + 3}
-                          y={baseY - height - 18}
-                          textAnchor="middle"
-                          fontSize="9"
-                          fill="#ffffff"
-                        >
-                          JUNE  Public: 80
-                        </text>
-                      </g>
-                    )}
-                  </g>
-                )
-              })}
-
-              {/* month labels */}
-              {months.map((m, i) => {
-                const x = i * (barWidth + gap) + barWidth / 2 + 8
-                return (
-                  <text
-                    key={m}
-                    x={x}
-                    y={115}
-                    fontSize="8"
-                    fill="#9ca3af"
-                    textAnchor="middle"
-                  >
-                    {m}
-                  </text>
-                )
-              })}
-            </ChartSvg>
-
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                  dy={6}
+                />
+                <YAxis
+                  domain={[0, 100]}
+                  ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: '#9ca3af' }}
+                  width={24}
+                  dx={-4}
+                />
+                <Tooltip content={<FileSharingTooltip />} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
+                <Bar
+                  dataKey="Public"
+                  fill={COLORS.public}
+                  radius={[6, 6, 0, 0]}
+                  barSize={14}
+                  shape={(p) => <BarWithShadow {...p} radius={6} />}
+                />
+                <Bar
+                  dataKey="Anyone with link"
+                  fill={COLORS.link}
+                  radius={[6, 6, 0, 0]}
+                  barSize={14}
+                  shape={(p) => <BarWithShadow {...p} radius={6} />}
+                />
+                <Bar
+                  dataKey="Within Organisation"
+                  fill={COLORS.org}
+                  radius={[6, 6, 0, 0]}
+                  barSize={14}
+                  shape={(p) => <BarWithShadow {...p} radius={6} />}
+                />
+              </BarChart>
+            </ResponsiveContainer>
             <LegendRow>
-              <LegendItem>
-                <LegendDot color="#93c5fd" />
-                <span>Public</span>
-              </LegendItem>
-              <LegendItem>
-                <LegendDot color="#2563eb" />
-                <span>Anyone with link</span>
-              </LegendItem>
-              <LegendItem>
-                <LegendDot color="#1d4ed8" />
-                <span>Within Organisation</span>
-              </LegendItem>
+              <LegendItem><LegendSquare color={COLORS.public} /> Public</LegendItem>
+              <LegendItem><LegendSquare color={COLORS.link} /> Anyone with link</LegendItem>
+              <LegendItem><LegendSquare color={COLORS.org} /> Within Organisation</LegendItem>
             </LegendRow>
           </ChartWrapper>
         </FileSharingBody>

@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { FiMonitor, FiUsers, FiMail, FiDownload } from "react-icons/fi";
+import { FiMonitor, FiClock, FiCalendar, FiUsers, FiGlobe, FiZap } from "react-icons/fi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { FiZap } from "react-icons/fi";
 
 const Wrapper = styled.div`
   background: #F6F6F6;
@@ -79,9 +78,10 @@ const Grid = styled.div`
 
 const Card = styled.div`
   background: white;
-  border-radius: 8px;
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 `;
 
 const Group = styled.div`
@@ -94,7 +94,7 @@ const Group = styled.div`
 const ChartSvg = styled.svg`
   width: 150px;
   height: 100px;
-  margin-bottom: -25px;
+  
 `
 
 const CardHeader = styled.div`
@@ -105,18 +105,20 @@ const CardHeader = styled.div`
 `;
 
 const IconBox = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
-  background: #f1f3f9;
+  background: #e5e7eb;
+  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const CardTitle = styled.div`
-  font-size: 18px;
-  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
 `;
 
 const ValueRow = styled.div`
@@ -126,21 +128,24 @@ const ValueRow = styled.div`
 `;
 
 const Value = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
+  color: #111827;
 `;
 
 const Change = styled.span<{ positive?: boolean }>`
   font-size: 16px;
   font-weight: 600;
-  
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: ${({ positive }) => (positive ? "#22c55e" : "#ef4444")};
 `;
 
 const SubText = styled.div`
-  font-size: 14px;
-  color: #505050;
-  margin-top: 6px;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 4px;
 `;
 
 export default function ProductivityReport() {
@@ -165,32 +170,33 @@ export default function ProductivityReport() {
 
             <Grid>
                 <StatCard
-                    title="Number Of Devices"
-                    value="3,836"
-                    change="↑15%"
+                    title="Hours Productivity"
+                    value="576 Hrs"
+                    change="15%"
+                    icon={<FiClock />}
+                />
+
+                <StatCard
+                    title="Days Activity"
+                    value="267 Days"
+                    change="15%"
                     positive
-                    icon={<FiMonitor />}
+                    icon={<FiCalendar />}
                 />
 
                 <StatCard
                     title="Users"
                     value="3,836"
-                    change="↓15%"
+                    change="15%"
                     icon={<FiUsers />}
                 />
 
                 <StatCard
-                    title="Emails"
-                    value="316"
-                    change="↑23%"
-                    icon={<FiMail />}
-                />
-
-                <StatCard
-                    title="Number of Apps"
-                    value="316"
-                    change="↑23%"
-                    icon={<FiDownload />}
+                    title="Web Activity"
+                    value="178 Activities"
+                    change="15%"
+                    positive
+                    icon={<FiGlobe />}
                 />
             </Grid>
         </Wrapper>
@@ -205,63 +211,51 @@ type StatProps = {
     icon: React.ReactNode;
 };
 
+const chartPaths = {
+  areaPositive: "M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6 L100,50 L0,50 Z",
+  areaNegative: "M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45 L100,50 L0,50 Z",
+  linePositive: "M0,40 C15,34 25,30 35,26 C45,22 60,18 70,14 C80,10 90,8 100,6",
+  lineNegative: "M0,10 C15,12 20,18 30,20 C40,22 50,18 60,25 C70,32 80,35 100,45",
+};
+
 function StatCard({ title, value, change, positive, icon }: StatProps) {
-    return (
-        <Card>
-            <Group>
-                <div>
-                    <CardHeader>
-                        <IconBox>{icon}</IconBox>
-                        <CardTitle>{title}</CardTitle>
-                    </CardHeader>
+  const isPositive = !!positive;
+  const slug = title.replace(/\s/g, "");
+  const gradientId = (isPositive ? "prodPos" : "prodNeg") + slug;
+  const color = isPositive ? "#22c55e" : "#ef4444";
+  const areaPath = isPositive ? chartPaths.areaPositive : chartPaths.areaNegative;
+  const linePath = isPositive ? chartPaths.linePositive : chartPaths.lineNegative;
 
-                    <ValueRow>
-                        <Value>{value}</Value>
-                        <Change positive={positive}>{change}</Change>
-                    </ValueRow>
+  return (
+    <Card>
+      <Group>
+        <div>
+          <CardHeader>
+            <IconBox>{icon}</IconBox>
+            <CardTitle>{title}</CardTitle>
+          </CardHeader>
 
-                    <SubText>Compared to last week</SubText>
+          <ValueRow>
+            <Value>{value}</Value>
+            <Change positive={positive}>
+              <span>{positive ? "↑" : "↓"}</span>
+              <span>{change}</span>
+            </Change>
+          </ValueRow>
 
-                </div>
-                <div>
-                    <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
-                                <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
-                            </linearGradient>
-                        </defs>
-
-                        {/* area fill */}
-                        <path
-                            d="
-            M0,40
-            C15,34 25,30 35,26
-            C45,22 60,18 70,14
-            C80,10 90,8 100,6
-            L100,50
-            L0,50
-            Z
-          "
-                            fill="url(#positiveGradient)"
-                        />
-
-                        {/* line */}
-                        <path
-                            d="
-            M0,40
-            C15,34 25,30 35,26
-            C45,22 60,18 70,14
-            C80,10 90,8 100,6
-          "
-                            fill="none"
-                            stroke="#22c55e"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
-                    </ChartSvg>
-                </div>
-            </Group>
-        </Card>
-    );
+          <SubText>Compared to last week</SubText>
+        </div>
+        <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={color} stopOpacity="0.35" />
+              <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+            </linearGradient>
+          </defs>
+          <path d={areaPath} fill={`url(#${gradientId})`} />
+          <path d={linePath} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        </ChartSvg>
+      </Group>
+    </Card>
+  );
 }

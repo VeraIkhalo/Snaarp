@@ -26,7 +26,7 @@ const SidebarRoot = styled.aside`
   margin-right:10px;
   width: 260px;
   padding: 24px 20px;
-  background: #ffffff;
+  background: #ffffff
   border-radius:8px;
   // display: flex;
   // flex-direction: column;
