@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# Snaarp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React dashboard app for cloud network metrics, file sharing, device management, productivity reports, and email analytics. Built with **Vite**, **TypeScript**, **styled-components**, and **Recharts**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to run the project
 
-## React Compiler
+### Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Node.js** (v18 or newer recommended)
+- **npm** (or yarn / pnpm)
 
-## Expanding the ESLint configuration
+### Install dependencies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run in development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Then open [http://localhost:5173](http://localhost:5173) in your browser. Vite will hot-reload on file changes.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+Output goes to the `dist/` folder.
+
+### Preview production build locally
+
+```bash
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+---
+
+## Tech stack
+
+| Area            | Technology              |
+|-----------------|-------------------------|
+| Framework       | React 19                |
+| Build           | Vite 7                  |
+| Language        | TypeScript              |
+| Styling         | styled-components       |
+| Charts          | Recharts                |
+| Icons           | react-icons             |
+| Drag and drop   | @dnd-kit (Sortable)     |
+
+---
+
+## Project structure
+
+```
+src/
+├── App.tsx                 # Root layout (sidebar + main content)
+├── main.tsx
+├── index.css
+└── components/
+    ├── Sidebar.tsx
+    ├── Header.tsx
+    ├── CloudNetwork.tsx
+    ├── CloudNetworkPanel.tsx   # Metrics grid + storage
+    ├── FileSharingActiveUsersPanel.tsx  # Bar chart + active users
+    ├── DeviceManagementDashboard.tsx    # Stat cards + device/user/email breakdowns
+    ├── ProductivityReport.tsx           # Hours, days, users, web activity cards
+    ├── EmailChart.tsx
+    ├── MetricsGrid.tsx       # Reusable grid (configurable columns)
+    ├── Storage.tsx
+    └── DragDropBoard.tsx
+```
+
+---
+
+## Challenges faced
+There were some inconsistencies in the UI
+
+
