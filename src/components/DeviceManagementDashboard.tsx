@@ -3,8 +3,7 @@ import { FiMonitor, FiUsers, FiMail, FiDownload } from "react-icons/fi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FiZap } from "react-icons/fi";
 import { GiUnplugged } from "react-icons/gi";
-import { FaApple } from "react-icons/fa";
-import { FaWindows } from "react-icons/fa";
+import { FaApple, FaWindows, FaBuilding } from "react-icons/fa";
 import { PiLinuxLogoThin } from "react-icons/pi";
 
 const Wrapper = styled.div`
@@ -84,12 +83,22 @@ const Grid = styled.div`
 const Card = styled.div`
   background: white;
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 `;
 
 const LargeCard = styled(Card)`
   grid-column: span 1;
+`;
+
+const LargeCardCol1 = styled(LargeCard)`
+  grid-column: 1;
+  grid-row: 2;
+`;
+
+const LargeCardCol2 = styled(LargeCard)`
+  grid-column: 2;
+  grid-row: 2;
 `;
 
 const DeviceTypesRow = styled.div`
@@ -103,7 +112,8 @@ const DeviceTypeSection = styled.div<{ hasDivider?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8px 12px;
+  align-items:center;
+  padding: 8px 8px;
   border-left: ${({ hasDivider }) => (hasDivider ? "1px solid #e5e7eb" : "none")};
 `;
 
@@ -260,12 +270,12 @@ export default function DeviceManagementDashboard() {
                     icon={<FiDownload />}
                 />
 
-                <LargeCard>
+                <LargeCardCol1>
                     <DeviceTypesRow>
                         <DeviceTypeSection>
                             <DeviceTypeTop>
                                 <DeviceTypeIcon>
-                                <FaWindows />
+                                    <FaWindows size={20} />
                                 </DeviceTypeIcon>
                                 <DeviceTypeName>Windows</DeviceTypeName>
                             </DeviceTypeTop>
@@ -274,7 +284,7 @@ export default function DeviceManagementDashboard() {
                         <DeviceTypeSection hasDivider>
                             <DeviceTypeTop>
                                 <DeviceTypeIcon>
-                                <FaApple />
+                                    <FaApple size={20} />
                                 </DeviceTypeIcon>
                                 <DeviceTypeName>Mac</DeviceTypeName>
                             </DeviceTypeTop>
@@ -283,14 +293,46 @@ export default function DeviceManagementDashboard() {
                         <DeviceTypeSection hasDivider>
                             <DeviceTypeTop>
                                 <DeviceTypeIcon>
-                                <PiLinuxLogoThin />
+                                    <PiLinuxLogoThin size={20} />
                                 </DeviceTypeIcon>
                                 <DeviceTypeName>Linux</DeviceTypeName>
                             </DeviceTypeTop>
                             <DeviceTypeCount>1,801 devices</DeviceTypeCount>
                         </DeviceTypeSection>
                     </DeviceTypesRow>
-                </LargeCard>
+                </LargeCardCol1>
+
+                <LargeCardCol2>
+                    <DeviceTypesRow>
+                        <DeviceTypeSection>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                    <FaBuilding size={20} />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Organizations</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,403 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                    <FiUsers size={20} />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Departments</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>632 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                        <DeviceTypeSection hasDivider>
+                            <DeviceTypeTop>
+                                <DeviceTypeIcon>
+                                    <FiUsers size={20} />
+                                </DeviceTypeIcon>
+                                <DeviceTypeName>Groups</DeviceTypeName>
+                            </DeviceTypeTop>
+                            <DeviceTypeCount>1,801 users</DeviceTypeCount>
+                        </DeviceTypeSection>
+                    </DeviceTypesRow>
+                </LargeCardCol2>
             </Grid>
         </Wrapper>
     );
