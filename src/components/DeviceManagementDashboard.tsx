@@ -8,7 +8,7 @@ import { PiLinuxLogoThin } from "react-icons/pi";
 
 const Wrapper = styled.div`
   background: #F6F6F6;
-  min-height: 100vh;
+  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
