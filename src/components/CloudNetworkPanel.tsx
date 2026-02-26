@@ -8,6 +8,7 @@ import { GrStorage } from "react-icons/gr";
 
 import StorageImg from '../assets/storage-img.png'
 import { FiZap } from "react-icons/fi";
+import MetricsGrid from './MetricsGrid'
 
 const Panel = styled.section`
   background:#F6F6F6;
@@ -66,16 +67,6 @@ const IconButton = styled.button`
   
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
-`
-
-const MetricsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
 `
 
 const MetricCard = styled.article`
