@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1.1fr 3fr;
   gap: 10px;
   background: #F6F6F6;
+  margin-bottom: 10px;
 `;
 
 const Card = styled.div`
