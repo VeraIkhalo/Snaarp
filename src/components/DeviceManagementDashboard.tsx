@@ -238,7 +238,9 @@ const Value = styled.div`
 const Change = styled.span<{ positive?: boolean }>`
   font-size: 16px;
   font-weight: 600;
-  
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: ${({ positive }) => (positive ? "#22c55e" : "#ef4444")};
 `;
 
@@ -301,7 +303,7 @@ export default function DeviceManagementDashboard() {
                 <StatCard
                     title="Number Of Devices"
                     value="3,836"
-                    change="↑15%"
+                    change="15%"
                     positive
                     icon={<FiMonitor />}
                 />
@@ -309,21 +311,21 @@ export default function DeviceManagementDashboard() {
                 <StatCard
                     title="Users"
                     value="3,836"
-                    change="↓15%"
+                    change="15%"
                     icon={<FiUsers />}
                 />
 
                 <StatCard
                     title="Emails"
                     value="316"
-                    change="↑23%"
+                    change="23%"
                     icon={<FiMail />}
                 />
 
                 <StatCard
                     title="Number of Apps"
                     value="316"
-                    change="↑23%"
+                    change="23%"
                     icon={<FiDownload />}
                     showBottomStats={false}
                 />
@@ -477,7 +479,10 @@ function StatCard({ title, value, change, positive, icon, showBottomStats = true
 
                     <ValueRow>
                         <Value>{value}</Value>
-                        <Change positive={positive}>{change}</Change>
+                        <Change positive={positive}>
+                            <span>{positive ? "↑" : "↓"}</span>
+                            <span>{change}</span>
+                        </Change>
                     </ValueRow>
 
                     <SubText>Compared to last week</SubText>
