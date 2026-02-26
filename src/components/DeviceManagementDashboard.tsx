@@ -325,6 +325,7 @@ export default function DeviceManagementDashboard() {
                     value="316"
                     change="↑23%"
                     icon={<FiDownload />}
+                    showBottomStats={false}
                 />
 
                 <LargeCardCol1>
@@ -422,9 +423,10 @@ type StatProps = {
     change: string;
     positive?: boolean;
     icon: React.ReactNode;
+    showBottomStats?: boolean;
 };
 
-function StatCard({ title, value, change, positive, icon }: StatProps) {
+function StatCard({ title, value, change, positive, icon, showBottomStats = true }: StatProps) {
     return (
         <Card>
             <Group>
@@ -481,25 +483,29 @@ function StatCard({ title, value, change, positive, icon }: StatProps) {
             </ChartSvg>
             </div>
             </Group>
-            <Divider />
 
-            <BottomStats>
-                <MiniStat>
-                    <MiniLabel>
-                        <IconButton><GiUnplugged size={16} /></IconButton>
-                        Plugged
-                    </MiniLabel>
-                    <MiniValue>1,923</MiniValue>
-                </MiniStat>
+            {showBottomStats && (
+                <>
+                    <Divider />
+                    <BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Plugged
+                            </MiniLabel>
+                            <MiniValue>1,923</MiniValue>
+                        </MiniStat>
 
-                <MiniStat>
-                    <MiniLabel>
-                        <IconButton><GiUnplugged size={16} /></IconButton>
-                        Unplugged
-                    </MiniLabel>
-                    <MiniValue>1,913</MiniValue>
-                </MiniStat>
-            </BottomStats>
+                        <MiniStat>
+                            <MiniLabel>
+                                <IconButton><GiUnplugged size={16} /></IconButton>
+                                Unplugged
+                            </MiniLabel>
+                            <MiniValue>1,913</MiniValue>
+                        </MiniStat>
+                    </BottomStats>
+                </>
+            )}
         </Card>
     );
 }
