@@ -6,8 +6,6 @@ import { MdUpload } from "react-icons/md";
 import { FcDepartment } from "react-icons/fc";
 import { GrStorage } from "react-icons/gr";
 
-import PositiveGraph from '../assets/positive-graph.png'
-import NegativeGraph from '../assets/negative-graph.png'
 import StorageImg from '../assets/storage-img.png'
 import { FiZap } from "react-icons/fi";
 
@@ -82,7 +80,7 @@ const MetricsGrid = styled.div`
 const MetricCard = styled.article`
   background: #ffffff;
   border-radius: 8px;
-  padding: 16px 18px;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -90,23 +88,25 @@ const MetricCard = styled.article`
 
 const MetricTitleRow = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 `
 const MetricTitleLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+   margin-bottom: -20px;
 `
 
 const MetricLabel = styled.span`
   font-size: 16px;
   font-weight: 500;
   color: #4A4A4A;
+ 
 `
 
 const MetricIcon = styled.div`
- display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 30px;
@@ -154,10 +154,93 @@ const MetricFooter = styled.span`
   
 `
 
-const MiniChart = styled.svg`
-  width: 90px;
-  height: 40px;
+const ChartSvg = styled.svg`
+  width: 150px;
+  height: 100px;
+  margin-bottom: -25px;
 `
+
+const MiniChart = ({ positive }: { positive: boolean }) => {
+  if (positive) {
+    return (
+      <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.05" />
+          </linearGradient>
+        </defs>
+
+        {/* area fill */}
+        <path
+          d="
+            M0,40
+            C15,34 25,30 35,26
+            C45,22 60,18 70,14
+            C80,10 90,8 100,6
+            L100,50
+            L0,50
+            Z
+          "
+          fill="url(#positiveGradient)"
+        />
+
+        {/* line */}
+        <path
+          d="
+            M0,40
+            C15,34 25,30 35,26
+            C45,22 60,18 70,14
+            C80,10 90,8 100,6
+          "
+          fill="none"
+          stroke="#22c55e"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </ChartSvg>
+    )
+  }
+
+  return (
+    <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="emailGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+
+      {/* area fill */}
+      <path
+        d="
+          M0,10
+          C15,12 20,18 30,20
+          C40,22 50,18 60,25
+          C70,32 80,35 100,45
+          L100,50
+          L0,50
+          Z
+        "
+        fill="url(#emailGradient)"
+      />
+
+      {/* line */}
+      <path
+        d="
+          M0,10
+          C15,12 20,18 30,20
+          C40,22 50,18 60,25
+          C70,32 80,35 100,45
+        "
+        fill="none"
+        stroke="#ef4444"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </ChartSvg>
+  )
+}
 
 function MetricCardView({
   title,
@@ -184,37 +267,7 @@ function MetricCardView({
             {positive ? '↑' : '↓'} {change}
           </MetricChange>
         </MetricValue>
-        <MiniChart viewBox="0 0 90 40" preserveAspectRatio="none">
-          <defs>
-            <linearGradient
-              id={`grad-${title}`}
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
-              <stop
-                offset="0%"
-                stopColor={positive ? '#22c55e' : '#f97373'}
-                stopOpacity="0.7"
-              />
-              <stop
-                offset="100%"
-                stopColor={positive ? '#bbf7d0' : '#fee2e2'}
-                stopOpacity="0"
-              />
-            </linearGradient>
-          </defs>
-          <MiniChart viewBox="0 0 90 40" preserveAspectRatio="none">
-            <image
-              href={positive ? PositiveGraph : NegativeGraph}
-              x="0"
-              y="0"
-              width="100%"
-              height="100%"
-            />
-          </MiniChart>
-        </MiniChart>
+        <MiniChart positive={positive} />
       </MetricMainRow>
 
       <MetricFooter>Compared to last week</MetricFooter>

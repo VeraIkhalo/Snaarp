@@ -87,6 +87,13 @@ const Card = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 `;
 
+const Group = styled.div`
+ display:flex;
+ align-items:flex-end;
+ justify-content:space-between;
+`;
+
+
 const LargeCard = styled(Card)`
   grid-column: span 1;
 `;
@@ -413,6 +420,8 @@ type StatProps = {
 function StatCard({ title, value, change, positive, icon }: StatProps) {
     return (
         <Card>
+            <Group>
+            <div>
             <CardHeader>
                 <IconBox>{icon}</IconBox>
                 <CardTitle>{title}</CardTitle>
@@ -425,6 +434,9 @@ function StatCard({ title, value, change, positive, icon }: StatProps) {
 
             <SubText>Compared to last week</SubText>
 
+            </div>
+            <div>gshgsgsgsghsg</div>
+            </Group>
             <Divider />
 
             <BottomStats>
