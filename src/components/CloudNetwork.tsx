@@ -33,10 +33,6 @@ const IconButton = styled.button`
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 
-  &:hover {
-    background: #f3f4f6;
-    color: #111827;
-  }
 `
 
 const CloudNetworkTitle = styled.h2`

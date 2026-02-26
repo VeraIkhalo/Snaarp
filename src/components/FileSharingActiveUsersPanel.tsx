@@ -1,11 +1,11 @@
 import styled from 'styled-components'
+import { GrStorage } from "react-icons/gr";
 
-// Layout container for the two cards
 const Row = styled.section`
-  margin: 0 24px 24px;
+  margin: 0 0 10px;
   display: grid;
-  grid-template-columns: 1.6fr 1.4fr;
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
@@ -15,7 +15,7 @@ const Row = styled.section`
 const Card = styled.article`
   background: #ffffff;
   border-radius: 16px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e5e7e
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
   padding: 18px 22px 20px;
 `
@@ -94,8 +94,6 @@ const DropdownButton = styled.button`
   cursor: pointer;
 `
 
-// ------- File Sharing left card -------
-
 const FileSharingBody = styled.div`
   padding-top: 4px;
 `
@@ -131,8 +129,6 @@ const LegendDot = styled.span<{ color: string }>`
   border-radius: 999px;
   background-color: ${({ color }) => color};
 `
-
-// ------- Active Users right card -------
 
 const ActiveUsersBody = styled.div`
   display: grid;
@@ -275,7 +271,6 @@ export function FileSharingActiveUsersPanel() {
   const values = [20, 32, 28, 40, 50, 80, 60, 55, 58, 62, 54, 49]
 
   const max = 100
-
   const barWidth = 18
   const gap = 10
   const chartHeight = 90
@@ -283,35 +278,13 @@ export function FileSharingActiveUsersPanel() {
 
   return (
     <Row aria-label="File sharing and active users">
-      {/* File Sharing card */}
       <Card>
         <CardHeader>
           <CardHeaderLeft>
             <CardTitleRow>
-              <CardIcon>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="2"
-                    y="3"
-                    width="12"
-                    height="10"
-                    rx="2"
-                    stroke="currentColor"
-                    fill="none"
-                  />
-                  <path
-                    d="M5 6h6M5 8h4M5 10h3"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </CardIcon>
+            <IconButton aria-label="Notifications">
+                    <GrStorage />
+                  </IconButton>
               <CardTitle>File Sharing</CardTitle>
             </CardTitleRow>
             <CardSubtitle>Keep track of files and how they&apos;re shared</CardSubtitle>

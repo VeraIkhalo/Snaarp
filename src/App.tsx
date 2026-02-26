@@ -4,6 +4,7 @@ import { Header } from './components/Header'
 import { CloudNetworkPanel } from './components/CloudNetworkPanel'
 import { FileSharingActiveUsersPanel } from './components/FileSharingActiveUsersPanel'
 import { CloudNetwork } from './components/CloudNetwork'
+import DeviceManagementDashboard from './components/DeviceManagementDashboard'
 
 const AppShell = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ function App() {
         <CloudNetwork />
         <CloudNetworkPanel />
         <FileSharingActiveUsersPanel />
+        <DeviceManagementDashboard />
       </AppContent>
     </AppShell>
   )

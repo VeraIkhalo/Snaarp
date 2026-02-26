@@ -9,6 +9,7 @@ import { GrStorage } from "react-icons/gr";
 import PositiveGraph from '../assets/positive-graph.png'
 import NegativeGraph from '../assets/negative-graph.png'
 import StorageImg from '../assets/storage-img.png'
+import { FiZap } from "react-icons/fi";
 
 const Panel = styled.section`
   background:#F6F6F6;
@@ -19,8 +20,8 @@ const Panel = styled.section`
 const PanelBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-
+  gap: 15px;
+  
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
   }
@@ -415,14 +416,12 @@ export function CloudNetworkPanel() {
             <ChartContainer>
               <ChartWrapper>
                 <StorageIcon>
-                  <IconButton aria-label="Notifications">
+                  <IconButton>
                     <GrStorage />
                   </IconButton>
                   <StorageTitle>Storage</StorageTitle>
-
                 </StorageIcon>
                 <img src={StorageImg} alt="Storage" />
-                
               </ChartWrapper>
             </ChartContainer>
 
@@ -448,23 +447,16 @@ export function CloudNetworkPanel() {
                 ))}
               </Legend>
 
-             
+
             </StorageInfo>
-            
+
           </StorageCard>
           <UpgradeButton type="button">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <path d="M8 2L10 6L14 7L10 8L8 12L6 8L2 7L6 6L8 2Z" fill="currentColor" />
-                </svg>
-                Upgrade Plan
-              </UpgradeButton>
+            <FiZap />
+            Upgrade Plan
+          </UpgradeButton>
         </StorageColumn>
-        
+
       </PanelBody>
     </Panel>
   )
