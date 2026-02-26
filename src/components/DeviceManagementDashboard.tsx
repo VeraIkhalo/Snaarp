@@ -80,6 +80,17 @@ const Grid = styled.div`
   }
 `;
 
+const StackedCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+
+  & > div {
+    flex: 1;
+  }
+`;
+
 const Card = styled.div`
   background: white;
   border-radius: 8px;
@@ -93,11 +104,16 @@ const Group = styled.div`
  justify-content:space-between;
 `;
 
+const GroupReader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+`;
 
 const ChartSvg = styled.svg`
   width: 150px;
   height: 100px;
-  
 `
 
 
@@ -322,13 +338,23 @@ export default function DeviceManagementDashboard() {
                     icon={<FiMail />}
                 />
 
-                <StatCard
-                    title="Number of Apps"
-                    value="316"
-                    change="23%"
-                    icon={<FiDownload />}
-                    showBottomStats={false}
-                />
+                <StackedCol>
+                    <StatCard
+                        title="Number of Apps"
+                        value="316"
+                        change="23%"
+                        icon={<FiDownload />}
+                        showBottomStats={false}
+                    />
+                    <StatCard
+                        title="Number of Downloads"
+                        value="316"
+                        change="23%"
+                        positive
+                        icon={<FiDownload />}
+                        showBottomStats={false}
+                    />
+                </StackedCol>
 
                 <LargeCardCol1>
                     <DeviceTypesRow>
@@ -471,7 +497,7 @@ function StatCard({ title, value, change, positive, icon, showBottomStats = true
     return (
         <Card>
             <Group>
-                <div>
+                <GroupReader>
                     <CardHeader>
                         <IconBox>{icon}</IconBox>
                         <CardTitle>{title}</CardTitle>
@@ -486,7 +512,7 @@ function StatCard({ title, value, change, positive, icon, showBottomStats = true
                     </ValueRow>
 
                     <SubText>Compared to last week</SubText>
-                </div>
+                </GroupReader>
                 <ChartSvg viewBox="0 0 100 50" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
