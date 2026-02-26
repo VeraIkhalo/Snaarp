@@ -28,9 +28,9 @@ const SidebarRoot = styled.aside`
   padding: 24px 20px;
   background: #ffffff;
   border-radius:8px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  // display: flex;
+  // flex-direction: column;
+  // gap: 24px;
 `
 
 const SidebarHeader = styled.div`
@@ -52,7 +52,7 @@ const Section = styled.nav<{ secondary?: boolean }>`
   ${({ secondary }) =>
     secondary &&
     `
-    margin-top: auto;
+    margin-top: 100px;
     border-top: none;
   `}
 `
@@ -105,7 +105,7 @@ const UserCard = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: -10px;
+  margin-top: 10px;
 `
 
 const AvatarWrapper = styled.div`
@@ -117,7 +117,7 @@ const AvatarWrapper = styled.div`
 const AvatarCircle = styled.div`
   width: 100%;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 50%;
   background: linear-gradient(135deg, #111827, #4b5563);
   color: #ffffff;
   display: flex;
@@ -128,14 +128,6 @@ const AvatarCircle = styled.div`
 `
 
 const AvatarStatus = styled.span`
-  position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: #22c55e;
-  border: 2px solid #ffffff;
 `
 
 const UserText = styled.div`

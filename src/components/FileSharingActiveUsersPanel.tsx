@@ -1,5 +1,10 @@
 import styled from 'styled-components'
-import { GrStorage } from "react-icons/gr";
+import { VscGraph } from "react-icons/vsc";
+import { BsGraphUp } from "react-icons/bs";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { FaRegFileVideo } from "react-icons/fa";
+import { LiaUserSolid } from "react-icons/lia";
+
 
 const Row = styled.section`
   margin: 0 0 10px;
@@ -20,78 +25,96 @@ const Card = styled.article`
   padding: 18px 22px 20px;
 `
 
-const CardHeader = styled.header`
+
+const CardHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-`
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 30px;
+`;
 
-const CardHeaderLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`
+const HeaderLeftGroup = styled.div`
+  
+`;
 
-const CardTitleRow = styled.div`
+const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-`
+  gap: 10px;
+`;
 
-const CardIcon = styled.div`
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: #f3f4f6;
+const HeaderRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const MonthSelect = styled.div`
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+   border: 2px solid #F5F5F5;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #374151;
+`;
+
+const IconBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #4b5563;
-`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #F6F6F6;
+  color: #6b7280;
+  border-radius: 8px;
+  cursor: pointer;
+  
+`;
 
-const CardTitle = styled.h3`
-  font-size: 15px;
+const IconBoxTwo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 40px;
+  border: 2px solid #F5F5F5;
+  background: transparent;
+  color: #6b7280;
+  border-radius: 8px;
+  cursor: pointer;
+`;
+
+const IconBoxThree = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 40px;
+  border: none ;
+  background: #EEF2FF;
+  color: #536AFF;
+  border-radius: 8px;
+  cursor: pointer;
+`;
+
+
+const Title = styled.h3`
+  font-size: 18px;
   font-weight: 600;
-  color: #111827;
   margin: 0;
-`
+`;
 
 const CardSubtitle = styled.p`
   font-size: 12px;
-  color: #9ca3af;
-  margin: 0;
-`
-
-const CardHeaderRight = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-`
-
-const IconButton = styled.button`
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`
-
-const DropdownButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #6b7280;
-  font-size: 12px;
-  cursor: pointer;
+  color: #8E8E8E;
+  margin: 5px 0 0 0;
 `
 
 const FileSharingBody = styled.div`
@@ -190,8 +213,12 @@ const UsersList = styled.ul`
 const UserRow = styled.li`
   display: flex;
   align-items: center;
+  border-radius:8px;
+  border:2px solid #E9E9E9;
+  height: 50px;
+  padding: 10px 10px;
   justify-content: space-between;
-  gap: 10px;
+  
 `
 
 const UserMeta = styled.div`
@@ -202,18 +229,21 @@ const UserMeta = styled.div`
 `
 
 const Flag = styled.span`
-  font-size: 16px;
+  font-size: 40px;
+  border-radius:8px;
 `
 
 const CountryName = styled.span`
-  font-size: 13px;
-  color: #111827;
-  white-space: nowrap;
+  font-size: 14px;
+  color: #A2A2A2;
 `
 
 const ProgressContainer = styled.div`
-  flex: 1;
-  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap:3px;
+  max-width: 270px;
+  width:100%;
 `
 
 const ProgressBarTrack = styled.div`
@@ -222,6 +252,7 @@ const ProgressBarTrack = styled.div`
   border-radius: 999px;
   background: #e5e7eb;
   overflow: hidden;
+ 
 `
 
 const ProgressBarFill = styled.div<{ percent: number }>`
@@ -234,8 +265,8 @@ const ProgressBarFill = styled.div<{ percent: number }>`
 const UserPercent = styled.span`
   font-size: 12px;
   color: #6b7280;
-  width: 40px;
-  text-align: right;
+  margin-bottom: -20px;
+ 
 `
 
 type UserStat = {
@@ -249,7 +280,7 @@ const users: UserStat[] = [
   { flag: '🇳🇬', name: 'Nigeria', percent: 61 },
   { flag: '🇦🇪', name: 'UAE', percent: 45 },
   { flag: '🇨🇦', name: 'Canada', percent: 59 },
-  { flag: '🇺🇸', name: 'United States of America', percent: 78 }
+  { flag: '🇺🇸', name: 'United States', percent: 78 }
 ]
 
 export function FileSharingActiveUsersPanel() {
@@ -280,35 +311,25 @@ export function FileSharingActiveUsersPanel() {
     <Row aria-label="File sharing and active users">
       <Card>
         <CardHeader>
-          <CardHeaderLeft>
-            <CardTitleRow>
-            <IconButton aria-label="Notifications">
-                    <GrStorage />
-                  </IconButton>
-              <CardTitle>File Sharing</CardTitle>
-            </CardTitleRow>
-            <CardSubtitle>Keep track of files and how they&apos;re shared</CardSubtitle>
-          </CardHeaderLeft>
+          <CardHeader>
+            <HeaderLeftGroup>
+              <HeaderLeft>
+                <IconBox><FaRegFileVideo /></IconBox>
+                <Title>File Sharing</Title>
+              </HeaderLeft>
+              <CardSubtitle>Keep track of files and how they are shared</CardSubtitle>
+            </HeaderLeftGroup>
 
-          <CardHeaderRight>
-            <IconButton aria-label="Chart view">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-              >
-                <rect x="2" y="9" width="2" height="5" rx="1" fill="#4f46e5" />
-                <rect x="7" y="5" width="2" height="9" rx="1" fill="#4f46e5" />
-                <rect x="12" y="3" width="2" height="11" rx="1" fill="#4f46e5" />
-              </svg>
-            </IconButton>
-            <DropdownButton type="button">
-              Month <span aria-hidden="true">▾</span>
-            </DropdownButton>
-          </CardHeaderRight>
+            <HeaderRight>
+              <IconBoxThree><VscGraph fontSize={18} />  </IconBoxThree>
+              <IconBoxTwo> <BsGraphUp /> </IconBoxTwo>
+
+              <MonthSelect>
+                Month <MdOutlineKeyboardArrowDown fontSize={30} />
+              </MonthSelect>
+            </HeaderRight>
+          </CardHeader>
         </CardHeader>
-
         <FileSharingBody>
           <ChartWrapper>
             <ChartSvg viewBox="0 0 260 120" preserveAspectRatio="none">
@@ -405,38 +426,16 @@ export function FileSharingActiveUsersPanel() {
       {/* Active Users card */}
       <Card>
         <CardHeader>
-          <CardHeaderLeft>
-            <CardTitleRow>
-              <CardIcon>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <circle
-                    cx="8"
-                    cy="5"
-                    r="2.5"
-                    stroke="currentColor"
-                    fill="none"
-                  />
-                  <path
-                    d="M3.5 12.5C4 10.5 5.7 9 8 9c2.3 0 4 1.5 4.5 3.5"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </CardIcon>
-              <CardTitle>Active Users</CardTitle>
-            </CardTitleRow>
-          </CardHeaderLeft>
-          <CardHeaderRight>
-            <DropdownButton type="button">
-              Month <span aria-hidden="true">▾</span>
-            </DropdownButton>
-          </CardHeaderRight>
+
+          <HeaderLeft>
+            <IconBox><LiaUserSolid /></IconBox>
+            <Title>Active Users</Title>
+          </HeaderLeft>
+          <HeaderRight>
+            <MonthSelect>
+              Month <MdOutlineKeyboardArrowDown fontSize={30} />
+            </MonthSelect>
+          </HeaderRight>
         </CardHeader>
 
         <ActiveUsersBody>
@@ -458,9 +457,10 @@ export function FileSharingActiveUsersPanel() {
               <UserRow key={user.name}>
                 <UserMeta>
                   <Flag>{user.flag}</Flag>
-                  <CountryName>{user.name}</CountryName>
+
                 </UserMeta>
                 <ProgressContainer>
+                  <CountryName>{user.name}</CountryName>
                   <ProgressBarTrack>
                     <ProgressBarFill percent={user.percent} />
                   </ProgressBarTrack>

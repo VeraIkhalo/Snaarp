@@ -55,7 +55,7 @@ const MonthSelect = styled.div`
   height: 40px;
   padding: 0 12px;
   border-radius: 8px;
-   border: 1px solid #F5F5F5;
+  border: 2px solid #F5F5F5;
   background: transparent;
   display: flex;
   align-items: center;
