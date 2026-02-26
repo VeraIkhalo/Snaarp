@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FiMonitor, FiUsers, FiMail, FiDownload } from "react-icons/fi";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown, MdMarkEmailRead, MdDrafts } from "react-icons/md";
 import { FiZap } from "react-icons/fi";
 import { GiUnplugged } from "react-icons/gi";
 import { FaApple, FaWindows, FaBuilding } from "react-icons/fa";
@@ -99,6 +99,48 @@ const LargeCardCol1 = styled(LargeCard)`
 const LargeCardCol2 = styled(LargeCard)`
   grid-column: 2;
   grid-row: 2;
+`;
+
+const LargeCardCol3 = styled(LargeCard)`
+  grid-column: 3;
+  grid-row: 2;
+`;
+
+const EmailStatusRow = styled.div`
+  display: flex;
+  align-items: stretch;
+  min-height: 72px;
+`;
+
+const EmailStatusSection = styled.div<{ hasDivider?: boolean }>`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 14px;
+  border-left: ${({ hasDivider }) => (hasDivider ? "1px solid #e5e7eb" : "none")};
+`;
+
+const EmailStatusTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 4px;
+`;
+
+const EmailStatusLabel = styled.span`
+  font-size: 13px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const EmailStatusValue = styled.div`
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
 `;
 
 const DeviceTypesRow = styled.div`
@@ -333,6 +375,27 @@ export default function DeviceManagementDashboard() {
                         </DeviceTypeSection>
                     </DeviceTypesRow>
                 </LargeCardCol2>
+
+                <LargeCardCol3>
+                    <EmailStatusRow>
+                        <EmailStatusSection>
+                            <EmailStatusTop>
+                                <EmailStatusLabel>
+                                    <MdMarkEmailRead size={18} style={{ color: "#6b7280" }} /> Read
+                                </EmailStatusLabel>
+                                <EmailStatusValue>1,403 emails</EmailStatusValue>
+                            </EmailStatusTop>
+                        </EmailStatusSection>
+                        <EmailStatusSection hasDivider>
+                            <EmailStatusTop>
+                                <EmailStatusLabel>
+                                    <MdDrafts size={18} style={{ color: "#6b7280" }} /> Unread
+                                </EmailStatusLabel>
+                                <EmailStatusValue>632 emails</EmailStatusValue>
+                            </EmailStatusTop>
+                        </EmailStatusSection>
+                    </EmailStatusRow>
+                </LargeCardCol3>
             </Grid>
         </Wrapper>
     );
